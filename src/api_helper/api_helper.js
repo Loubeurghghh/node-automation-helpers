@@ -1,7 +1,7 @@
-import * as requestPromise from 'request-promise';
-import 'dotenv';
-import 'chai';
-import * as fs from 'fs';
+const requestPromise = require('request-promise');
+require('dotenv').config();
+const { should } = require('chai');
+const fs = require('fs');
 
 
 class ApiHelper
