@@ -1,0 +1,22 @@
+{
+  "name": "automation-helpers",
+  "version": "1.0.0",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "dotenv": "^6.2.0",
+    "faker": "^4.1.0",
+    "request-promise": "^4.2.4"
+  },
+  "description": "generic helpers for test automation",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@tungsten.filament.uk.com:QA/helpers.git"
+  },
+  "author": "Lou Robinson <lou.robinson@filament.ai>",
+  "license": "ISC"
+}
