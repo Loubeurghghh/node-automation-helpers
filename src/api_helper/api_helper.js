@@ -1,6 +1,6 @@
 const requestPromise = require('request-promise');
 require('dotenv').config();
-const { should } = require('chai');
+const should = require('chai').should();
 const fs = require('fs');
 
 
