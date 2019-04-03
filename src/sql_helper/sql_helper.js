@@ -1,5 +1,5 @@
 const should = require('chai').should();
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 
 class SqlHelper{
