@@ -15,6 +15,13 @@ class TestDataHelper
         return faker.company.bs();
     }
 
+    static generateWord(){
+        const word = faker.random.word();
+        if(word.includes(' ')){
+            return word.split(' ', 1);
+        }
+        return word;
+    }
 }
 
 module.exports = TestDataHelper;
