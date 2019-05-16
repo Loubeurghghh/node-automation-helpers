@@ -1,4 +1,5 @@
 const faker = require('faker');
+const randomWords = require('random-words');
 
 
 class TestDataHelper
@@ -16,11 +17,15 @@ class TestDataHelper
     }
 
     static generateWord(){
-        const word = faker.random.word();
-        if(word.includes(' ')){
-            return word.split(' ', 1);
-        }
-        return word;
+        return randomWords();
+    }
+
+    static generateWords(numberOfWords){
+        return randomWords(numberOfWords);
+    }
+
+    static generateSentence(){
+        return faker.lorem.sentence();
     }
 }
 
