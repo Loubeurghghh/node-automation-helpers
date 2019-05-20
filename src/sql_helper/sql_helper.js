@@ -7,9 +7,9 @@ class SqlHelper{
     constructor(){
         should.exist(process.env.DB_USER, 'Environment variable DB_USER not set.');
         should.exist(process.env.DB_PASSWORD, 'Environment variable DB_PASSWORD not set.');
-        should.exist(process.env.DB_NAME, 'Environment variable DB_PASSWORD not set.');
-        should.exist(process.env.DB_HOST, 'Environment variable DB_PASSWORD not set.');
-        should.exist(process.env.DB_PORT, 'Environment variable DB_PASSWORD not set.');
+        should.exist(process.env.DB_NAME, 'Environment variable DB_NAME not set.');
+        should.exist(process.env.DB_HOST, 'Environment variable DB_HOST not set.');
+        should.exist(process.env.DB_PORT, 'Environment variable DB_PORT not set.');
         
         this.db = mysql.createPool({
             connectionLimit: 10,
@@ -19,6 +19,10 @@ class SqlHelper{
             password : process.env.DB_PASSWORD,
             database : process.env.DB_NAME,
           });
+    }
+
+    async closeConnectionPool(){
+        await this.db.end();
     }
 
     async query(query, values=null){
