@@ -10,24 +10,24 @@ class GmailApi {
       process.env.GMAIL_REDIRECT_URIS,
     );
     oauth2Client.setCredentials({
-      "access_token": "ya29.GlsZB9sjhMH4BsmvKsP7X-YSfxhQ70jJeHovUjOdFvxpo3UeaCmpq3C__n3Zxb0aCaWtEq-m4F1XghN7dRGVr6PI8TalwAhoCW9f0nMcxCC3H0v-sMDo7udmQsNV",
-      "refresh_token": "1/9eRuwZvFeNTOJdNSPcqzNGOkA_mu8RDNYPcgmRjBruE",
-      "scope": "https://www.googleapis.com/auth/gmail.readonly",
+      "access_token": process.env.GMAIL_ACCESS_TOKEN,
+      "refresh_token": process.env.GMAIL_REFRESH_TOKEN,
+      "scope": "https://www.googleapis.com/auth/gmail.modify",
       "token_type": "Bearer",
-      "expiry_date": 1559225168980
+      "expiry_date": process.env.GMAIL_EXPIRY_DATE
     });
     this.gmail = google.gmail({ version: 'v1', auth: oauth2Client });
   }
 
   async getMail(user){
+    await Sleeper.sleep(5);
     return (await this.gmail.users.messages.list({
       userId: user.email
-      //q: "from:noreply@filament.ai is:unread"
     })).data;
   }
 
   async getMessageById(user, messageId){
-    await Sleeper.sleep(10);
+    await Sleeper.sleep(5);
     const email = (await this.gmail.users.messages.get({
       userId: user.email,
       id: messageId
@@ -37,6 +37,18 @@ class GmailApi {
   }
   else throw new Error(`Couldn't find an email for ${user.email} with an id of ${messageId}.`)
   }
+
+  async modifyMessageById(user, messageId) {
+    await Sleeper.sleep(5);
+    await this.gmail.users.messages.modify({
+      userId: user.email,
+      id: messageId,
+      resource: {
+        addLabelIds: ['TRASH'],
+        removeLabelIds: ['INBOX']
+      }
+    });
+  };
 }
 
 module.exports = GmailApi;
