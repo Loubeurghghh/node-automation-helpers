@@ -27,6 +27,10 @@ class TestDataHelper
     static generateSentence(){
         return faker.lorem.sentence();
     }
+
+    static generatePassword(){
+        return faker.internet.password(10, false);
+    }
 }
 
 module.exports = TestDataHelper;

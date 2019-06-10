@@ -4,29 +4,24 @@ const should = require('chai').should();
 const fs = require('fs');
 
 
-class ApiHelper
-{
-    constructor(){
+class ApiHelper {
+    constructor() {
         should.exist(process.env.DOMAIN_URL, 'Environment variable DOMAIN_URL not set.');
-        this.headers = {'Content-type': 'application/json'};
+        this.headers = { 'Content-type': 'application/json' };
         this.domainUrl = process.env.DOMAIN_URL;
     }
 
-
-    checkAuth(authToken)
-    {
+    checkAuth(authToken) {
         if (authToken !== null) {
             this.addAuthorizationHeader(authToken);
         }
     }
 
-    addAuthorizationHeader(authToken)
-    {
-         this.headers.authorization = authToken;
+    addAuthorizationHeader(authToken) {
+        this.headers.authorization = authToken;
     }
 
-    checkUrl(baseUrl)
-    {
+    checkUrl(baseUrl) {
         if (baseUrl == null) {
             return this.domainUrl;
         }
@@ -35,7 +30,8 @@ class ApiHelper
     apiPost(endpoint, payload, authToken = null, baseUrl = null) {
         this.checkAuth(authToken);
         baseUrl = this.checkUrl(baseUrl);
-        console.log(payload);
+        console.log('Request URI:', baseUrl + endpoint);
+        console.log('Request payload:', payload);
         return requestPromise({
             method: 'POST',
             uri: baseUrl + endpoint,
@@ -47,10 +43,10 @@ class ApiHelper
         });
     }
 
-    async apiGet(endpoint, authToken = null, baseUrl = null)
-    {
+    async apiGet(endpoint, authToken = null, baseUrl = null) {
         this.checkAuth(authToken);
         baseUrl = this.checkUrl(baseUrl);
+        console.log('Request URI:', baseUrl + endpoint);
         return await requestPromise({
             method: 'GET',
             uri: baseUrl + endpoint,
@@ -64,7 +60,8 @@ class ApiHelper
     async apiPut(endpoint, payload, authToken = null, baseUrl = null) {
         this.checkAuth(authToken);
         baseUrl = this.checkUrl(baseUrl);
-        console.log(payload);
+        console.log('Request URI:', baseUrl + endpoint);
+        console.log('Request payload:', payload);
         return await requestPromise({
             method: 'PUT',
             uri: baseUrl + endpoint,
@@ -76,10 +73,10 @@ class ApiHelper
         });
     }
 
-    async apiDelete(endpoint, authToken = null, baseUrl = null)
-    {
+    async apiDelete(endpoint, authToken = null, baseUrl = null) {
         this.checkAuth(authToken);
         baseUrl = this.checkUrl(baseUrl);
+        console.log('Request URI:', baseUrl + endpoint);
         return await requestPromise({
             method: 'DELETE',
             uri: baseUrl + endpoint,
@@ -93,8 +90,9 @@ class ApiHelper
     async apiPostFormData(endpoint, formData, filePath = null, authToken = null, baseUrl = null) {
         this.checkAuth(authToken);
         baseUrl = this.checkUrl(baseUrl);
-        console.log(formData);
-        if(filePath != null){
+        console.log('Request URI:', baseUrl + endpoint);
+        console.log('Request payload:', formData);
+        if (filePath != null) {
             formData.file = fs.createReadStream(filePath);
         }
         return await requestPromise({
