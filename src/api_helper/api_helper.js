@@ -25,9 +25,10 @@ class ApiHelper {
         if (baseUrl == null) {
             return this.domainUrl;
         }
+        return baseUrl;
     }
 
-    apiPost(endpoint, payload, authToken = null, baseUrl = null) {
+    async apiPost(endpoint, payload, authToken = null, baseUrl = null) {
         this.checkAuth(authToken);
         baseUrl = this.checkUrl(baseUrl);
         console.log('Request URI:', baseUrl + endpoint);
@@ -43,6 +44,20 @@ class ApiHelper {
         });
     }
 
+    async apiPostWithNoPayload(endpoint, authToken = null, baseUrl = null) {
+        this.checkAuth(authToken);
+        baseUrl = this.checkUrl(baseUrl);
+        console.log('Request URI:', baseUrl + endpoint);
+        return requestPromise({
+            method: 'POST',
+            uri: baseUrl + endpoint,
+            headers: this.headers,
+            resolveWithFullResponse: true,
+            simple: false,
+            timeout: 15000
+        });
+    }
+
     async apiGet(endpoint, authToken = null, baseUrl = null) {
         this.checkAuth(authToken);
         baseUrl = this.checkUrl(baseUrl);
@@ -50,6 +65,21 @@ class ApiHelper {
         return await requestPromise({
             method: 'GET',
             uri: baseUrl + endpoint,
+            headers: this.headers,
+            resolveWithFullResponse: true,
+            simple: false,
+            timeout: 15000
+        });
+    }
+    async apiGetWithPayload(endpoint, payload, authToken = null, baseUrl = null){
+        this.checkAuth(authToken);
+        baseUrl = this.checkUrl(baseUrl);
+        console.log('Request URI:', baseUrl + endpoint);
+        console.log('Request payload:', payload);
+        return requestPromise({
+            method: 'GET',
+            uri: baseUrl + endpoint,
+            body: payload,
             headers: this.headers,
             resolveWithFullResponse: true,
             simple: false,
