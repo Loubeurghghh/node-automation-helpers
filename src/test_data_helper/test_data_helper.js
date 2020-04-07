@@ -1,4 +1,5 @@
 const faker = require('faker');
+const randexp = require('randexp').randexp;
 const randomWords = require('random-words');
 
 
@@ -29,7 +30,7 @@ class TestDataHelper
     }
 
     static generatePassword(){
-        return faker.internet.password(10, false);
+        return randexp(/[a-z][A-Z][0-9][!@#\$%\^&\*]{8,50}/);
     }
 
     static generateHexColourCode(){
