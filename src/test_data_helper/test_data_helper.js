@@ -30,7 +30,7 @@ class TestDataHelper
     }
 
     static generatePassword(){
-        return randexp(/[a-z][A-Z][0-9][!@#\$%\^&\*]{8,50}/)
+        return randexp(/[a-z][A-Z][0-9][!@#\$%\^&\*]{8,50}/);
     }
 
     static generateHexColourCode(){
