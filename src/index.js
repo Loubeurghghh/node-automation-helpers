@@ -4,7 +4,6 @@ const SqlHelper = require('./sql_helper/sql_helper');
 const EsHelper = require('./es_helper/es_helper');
 const TestDataHelper = require('./test_data_helper/test_data_helper');
 const Sleeper = require('./sleeper/sleeper');
-const GmailApi = require('./gmail_api/gmail_api');
 
 module.exports = {
     ApiHelper,
@@ -12,6 +11,5 @@ module.exports = {
     SqlHelper,
     TestDataHelper,
     Sleeper,
-    GmailApi,
     EsHelper,
 };
