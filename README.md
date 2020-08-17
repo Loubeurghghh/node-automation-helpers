@@ -12,7 +12,7 @@ Executes search queries against an ElasticSearch database.
 
 ## JSON Helper
 
-Offers the ability to laod json files if given a filepath.
+Offers the ability to load json files if given a filepath.
 
 ## Sleeper
 
